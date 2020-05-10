@@ -12,5 +12,5 @@ import java.util.Date;
 public class ChatDetailsResponse {
     private String userName;
     private String text;
-    private Date expiratationDate;
+    private Date expirationDate;
 }
