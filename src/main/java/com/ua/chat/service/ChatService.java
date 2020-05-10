@@ -6,6 +6,8 @@ import com.ua.chat.mapping.ChatCreateRequest;
 import com.ua.chat.model.User;
 import com.ua.chat.repository.ChatRepository;
 import com.ua.chat.repository.UserRepository;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,8 @@ import java.util.stream.Collectors;
 
 import static java.time.LocalTime.now;
 
+@Data
+@NoArgsConstructor
 @Service
 public class ChatService {
 
