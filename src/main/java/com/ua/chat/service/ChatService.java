@@ -54,7 +54,7 @@ public class ChatService {
         List<ChatResponse> responses = new ArrayList<>();
         responses = chat.stream()
                 .filter(c->{
-                    return now().isBefore(c.getExpirationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime());
+                    return !c.isRead() && now().isBefore(c.getExpirationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime());
                 })
                 .map(c -> {
             return new ChatResponse(c.getId(),c.getUser().getUserName(),c.getText(),c.getExpirationDate()); }
