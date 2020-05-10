@@ -43,4 +43,10 @@ GET /chats/:username
 	        "text": "string"
 	    }
     ]
-See included **Swagger doc** for thorough documantion of API.
+##### Create message 
+
+    curl http://localhost:8080/api/chats -H "Content-Type: application/json" -d '{"text": "hello","userName": "jdoe"}'
+
+##### Get message 
+
+     curl -X GET http://localhost:8080/api/chats/5
