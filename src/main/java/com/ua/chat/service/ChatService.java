@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
 
 import static java.time.LocalTime.now;
 
-@Data
-@NoArgsConstructor
 @Service
 public class ChatService {
 
