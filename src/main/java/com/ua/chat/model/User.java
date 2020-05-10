@@ -4,15 +4,18 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Data
+@NoArgsConstructor
 @RequiredArgsConstructor
 @ToString
 @Entity
 public class User {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @Column(name = "first_name")
