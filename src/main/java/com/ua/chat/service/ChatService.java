@@ -11,7 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.time.LocalTime.now;
 
 @Service
 public class ChatService {
@@ -38,6 +46,19 @@ public class ChatService {
     public ChatResponse getChat(Long id) {
         Chat chat = chatRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chat record not found"));
-        return new ChatResponse(chat.getUser().getUserName(),chat.getText(),chat.getExpirationDate());
+        return new ChatResponse(chat.getId(),chat.getUser().getUserName(),chat.getText(),chat.getExpirationDate());
+    }
+
+    public List<ChatResponse> getChats(String userName) {
+        List<Chat> chat = chatRepository.findAllByUser_userName(userName);
+        List<ChatResponse> responses = new ArrayList<>();
+        responses = chat.stream()
+                .filter(c->{
+                    return now().isBefore(c.getExpirationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime());
+                })
+                .map(c -> {
+            return new ChatResponse(c.getId(),c.getUser().getUserName(),c.getText(),c.getExpirationDate()); }
+        ).collect(Collectors.toList());
+        return responses;
     }
 }

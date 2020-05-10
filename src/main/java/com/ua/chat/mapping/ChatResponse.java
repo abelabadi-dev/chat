@@ -14,13 +14,15 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ChatResponse {
 
-    @JsonView(ResponseView.ChatCreatedResponse.class)
+    @JsonView({ResponseView.ChatCreatedResponse.class, ResponseView.ChatCollectionResponse.class})
     private Long id;
 
     @JsonView(ResponseView.ChatDetailsResponse.class)
     private String userName;
-    @JsonView(ResponseView.ChatDetailsResponse.class)
+
+    @JsonView({ResponseView.ChatDetailsResponse.class, ResponseView.ChatCollectionResponse.class})
     private String text;
+
     @JsonView(ResponseView.ChatDetailsResponse.class)
     private Date expirationDate;
 
